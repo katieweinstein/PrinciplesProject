@@ -3,6 +3,8 @@ import axios from 'axios';
 
 export default function Home() {
   const [breedList, setBreedList] = React.useState([]);
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [filteredBreedList, setFilteredBreedList] = React.useState([]);
 
   React.useEffect(async () => {
     const list = await getBreedList();
@@ -29,14 +31,26 @@ export default function Home() {
     setBreedList(finalList);
   }
 
+  async function filterBreeds(query) {
+    const filteredBreeds = breedList.filter((name) => name.includes(query));
+    setFilteredBreedList(filteredBreeds);
+  }
+
   return (
     <div>
-      <h1>This is the home page.</h1>
+      <input
+        type="text"
+        onChange={() => {
+          setSearchQuery(event.target.value);
+          filterBreeds(event.target.value);
+        }}
+        value={searchQuery}
+        placeholder="Search for breeds..."
+      />
       <ul>
-        {breedList.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-        <li></li>
+        {searchQuery.length
+          ? filteredBreedList.map((item, index) => <li key={index}>{item}</li>)
+          : breedList.map((item, index) => <li key={index}>{item}</li>)}
       </ul>
     </div>
   );
