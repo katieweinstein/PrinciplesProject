@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const [breedList, setBreedList] = React.useState([]);
@@ -37,21 +38,38 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <input
-        type="text"
-        onChange={() => {
-          setSearchQuery(event.target.value);
-          filterBreeds(event.target.value);
-        }}
-        value={searchQuery}
-        placeholder="Search for breeds..."
-      />
-      <ul>
+    <div className="container">
+      <div className="container">
+        <h1>Get your random dog pictures here!</h1>
+        <input
+          type="text"
+          onChange={() => {
+            setSearchQuery(event.target.value);
+            filterBreeds(event.target.value);
+          }}
+          value={searchQuery}
+          placeholder="Search for breeds..."
+        />
+      </div>
+      <div className="linkContainer">
         {searchQuery.length
-          ? filteredBreedList.map((item, index) => <li key={index}>{item}</li>)
-          : breedList.map((item, index) => <li key={index}>{item}</li>)}
-      </ul>
+          ? filteredBreedList.map((item, index) => {
+              const URLname = item.replace(/\s/g, '-');
+              return (
+                <Link to={`/${URLname}`} key={index} className="link container">
+                  {item}
+                </Link>
+              );
+            })
+          : breedList.map((item, index) => {
+              const URLname = item.replace(/\s/g, '-');
+              return (
+                <Link to={`/${URLname}`} key={index} className="link container">
+                  {item}
+                </Link>
+              );
+            })}
+      </div>
     </div>
   );
 }

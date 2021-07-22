@@ -1,3 +1,47 @@
 body {
-  background-color: aquamarine;
+  background-color: #a4c2a5;
+  font-family: Garamond, serif;
+  color: #feffa5;
+}
+
+input {
+  width: 300px;
+  height: 30px;
+  border: 2px solid #7d9276;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+img {
+  width: 300px;
+  height: auto;
+  margin: 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.linkContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.link {
+  font-family: Georgia, serif;
+  color: #feffa5;
+  background-color: #566246;
+  text-decoration: none;
+  border: 2px solid #7d9276;
+  border-radius: 10px;
+  margin: 10px;
+  padding: 5px;
+  width: 150px;
+  height: 50px;
+  text-align: center;
 }
