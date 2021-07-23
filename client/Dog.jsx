@@ -5,11 +5,13 @@ import { useParams, Link } from 'react-router-dom';
 export default function Dog() {
   const [dogImages, setDogImages] = React.useState([]);
 
+  // Get the dog images from the API when the component renders.
   React.useEffect(async () => {
     const imageList = await getDogImages();
     setDogImages(imageList);
   }, []);
 
+  // This creates the URL with the breed name to make the API call.
   function createURL(URLid) {
     let name = URLid;
     if (URLid.includes('-')) {
@@ -20,7 +22,9 @@ export default function Dog() {
     }
   }
 
+  // This is the dog name from the URL.
   let { id } = useParams();
+  // Replace the - with a space to use as the page title and alt text for the image.
   const dogName = id.replace(/-/g, ' ');
 
   async function getDogImages() {
